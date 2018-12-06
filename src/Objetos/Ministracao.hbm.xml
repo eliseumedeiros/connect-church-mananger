@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03/06/2016 10:35:39 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Objetos.Ministracao" table="ministracao" catalog="connect_church" optimistic-lock="version">
+        <composite-id name="id" class="Objetos.MinistracaoId">
+            <key-property name="temaEvt" type="string">
+                <column name="tema_evt" length="45" />
+            </key-property>
+            <key-property name="diaHoraEvt" type="timestamp">
+                <column name="dia_hora_evt" length="19" />
+            </key-property>
+            <key-property name="tituloMsg" type="string">
+                <column name="titulo_msg" length="45" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="evento" class="Objetos.Evento" update="false" insert="false" fetch="select">
+            <column name="tema_evt" length="45" not-null="true" />
+            <column name="dia_hora_evt" length="19" not-null="true" />
+        </many-to-one>
+        <many-to-one name="mensagem" class="Objetos.Mensagem" update="false" insert="false" fetch="select">
+            <column name="titulo_msg" length="45" not-null="true" />
+        </many-to-one>
+        <many-to-one name="pessoa" class="Objetos.Pessoa" fetch="select">
+            <column name="id_minist" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

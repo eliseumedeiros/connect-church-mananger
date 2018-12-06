@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03/06/2016 10:35:39 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Objetos.Assiduidade" table="assiduidade" catalog="connect_church" optimistic-lock="version">
+        <composite-id name="id" class="Objetos.AssiduidadeId">
+            <key-property name="dataAula" type="date">
+                <column name="data_aula" length="10" />
+            </key-property>
+            <key-property name="idAluno" type="int">
+                <column name="id_aluno" />
+            </key-property>
+            <key-property name="codigo" type="string">
+                <column name="codigo" length="10" />
+            </key-property>
+            <key-property name="dataInicio" type="date">
+                <column name="data_inicio" length="10" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="matricula" class="Objetos.Matricula" update="false" insert="false" fetch="select">
+            <column name="id_aluno" not-null="true" />
+            <column name="codigo" length="10" not-null="true" />
+            <column name="data_inicio" length="10" not-null="true" />
+        </many-to-one>
+        <property name="presenca" type="boolean">
+            <column name="presenca" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

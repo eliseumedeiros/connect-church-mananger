@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03/06/2016 10:35:39 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="connect_church" name="Objetos.Noticia" optimistic-lock="version" table="noticia">
+    <id name="id" type="java.lang.Integer">
+      <column name="id"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="Objetos.Evento" fetch="select" name="evento">
+      <column length="45" name="tema_evt"/>
+      <column length="19" name="dia_hora_evt"/>
+    </many-to-one>
+    <many-to-one class="Objetos.Membro" fetch="select" name="cadastrante" update="false">
+      <column name="id_cadastrante" not-null="true"/>
+    </many-to-one>
+    <property name="manchete" type="string">
+      <column name="manchete" not-null="true"/>
+    </property>
+    <property name="texto" type="string">
+      <column name="texto" not-null="true"/>
+    </property>
+    <property name="data" type="date">
+      <column name="data_noticia" length="10" not-null="true"/>
+    </property>
+  </class>
+</hibernate-mapping>

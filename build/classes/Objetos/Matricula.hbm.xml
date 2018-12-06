@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03/06/2016 10:35:39 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="connect_church" name="Objetos.Matricula" optimistic-lock="version" table="matricula">
+    <composite-id class="Objetos.MatriculaId" name="id">
+      <key-property name="idAluno" type="int">
+        <column name="id_aluno"/>
+      </key-property>
+      <key-property name="codDisc" type="string">
+        <column length="10" name="cod_disc"/>
+      </key-property>
+      <key-property name="dataInicio" type="date">
+        <column length="10" name="data_inicio"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="Objetos.Membro" fetch="select" insert="false" name="aluno" update="false">
+      <column name="id_aluno" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="Objetos.Turma" fetch="select" insert="false" name="turma" update="false">
+      <column length="10" name="cod_disc" not-null="true"/>
+      <column length="10" name="data_inicio" not-null="true"/>
+    </many-to-one>
+    <property name="notaFinal" type="java.lang.Float">
+      <column name="nota_final" precision="12" scale="0"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="assiduidades" table="assiduidade">
+      <key>
+        <column name="id_aluno" not-null="true"/>
+        <column length="10" name="codigo" not-null="true"/>
+        <column length="10" name="data_inicio" not-null="true"/>
+      </key>
+      <one-to-many class="Objetos.Assiduidade"/>
+    </set>
+  </class>
+</hibernate-mapping>

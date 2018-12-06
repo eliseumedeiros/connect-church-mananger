@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03/06/2016 10:35:39 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="connect_church" name="Objetos.Mensagem" optimistic-lock="version" table="mensagem">
+    <id name="titulo" type="string">
+      <column length="45" name="titulo"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="baseBiblica" type="string">
+      <column length="20" name="base_biblica"/>
+    </property>
+    <property name="tema" type="string">
+      <column length="45" name="tema"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="ministracoes" table="ministracao">
+      <key>
+        <column length="45" name="titulo_msg" not-null="true"/>
+      </key>
+      <one-to-many class="Objetos.Ministracao"/>
+    </set>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03/06/2016 10:35:39 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="connect_church" name="Objetos.Membro" optimistic-lock="version" table="membro">
+    <id name="id" type="int">
+      <column name="id"/>
+      <generator class="foreign">
+        <param name="property">pessoa</param>
+      </generator>
+    </id>
+    <many-to-one class="Objetos.Grupo" fetch="select" name="grupo">
+      <column name="id_lider"/>
+      <column length="8" name="hora_grupo"/>
+      <column length="10" name="dia_sem_grupo"/>
+    </many-to-one>
+    <one-to-one class="Objetos.Pessoa" constrained="true" name="pessoa"/>
+    <property name="cpf" type="string">
+      <column length="11" name="cpf" not-null="true"/>
+    </property>
+    <property name="dataNasc" type="date">
+      <column length="10" name="data_nasc"/>
+    </property>
+    <property name="batismoApres" type="date">
+      <column length="10" name="batismo_apres"/>
+    </property>
+    <property name="usuario" type="string">
+      <column length="45" name="usuario" not-null="true" unique="true"/>
+    </property>
+    <property name="senha" type="string">
+      <column length="45" name="senha" not-null="true"/>
+    </property>
+    <property name="permissoes" type="int">
+      <column name="permissoes" not-null="true"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="ministerios" table="ministerio">
+      <key>
+        <column name="id_lider" not-null="true"/>
+      </key>
+      <one-to-many class="Objetos.Ministerio"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="seminarios" table="seminario">
+      <key>
+        <column name="id_coordenador" not-null="true"/>
+      </key>
+      <one-to-many class="Objetos.Seminario"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="grupos" table="grupo">
+      <key>
+        <column name="id_lider" not-null="true"/>
+      </key>
+      <one-to-many class="Objetos.Grupo"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="matriculas" table="matricula">
+      <key>
+        <column name="id_aluno" not-null="true"/>
+      </key>
+      <one-to-many class="Objetos.Matricula"/>
+    </set>
+    <set fetch="select" inverse="false" lazy="true" name="ministerios_lidera" table="participa_ministerio">
+      <key>
+        <column name="id_membro" not-null="true"/>
+      </key>
+      <many-to-many entity-name="Objetos.Ministerio">
+        <column length="45" name="ministerio" not-null="true"/>
+      </many-to-many>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="turmas" table="turma">
+      <key>
+        <column name="id_prof" not-null="true"/>
+      </key>
+      <one-to-many class="Objetos.Turma"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="noticias" table="noticia">
+      <key>
+        <column name="id_cadastrante" not-null="true"/>
+      </key>
+      <one-to-many class="Objetos.Noticia"/>
+    </set>
+  </class>
+</hibernate-mapping>

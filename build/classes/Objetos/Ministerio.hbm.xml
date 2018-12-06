@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03/06/2016 10:35:39 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="connect_church" name="Objetos.Ministerio" optimistic-lock="version" table="ministerio">
+    <id name="nome" type="string">
+      <column length="45" name="nome"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="Objetos.Membro" fetch="select" name="lider">
+      <column name="id_lider" not-null="true"/>
+    </many-to-one>
+    <property name="descricao" type="string">
+      <column length="16777215" name="descricao"/>
+    </property>
+    <property name="hora" type="time">
+      <column length="8" name="hora" not-null="true"/>
+    </property>
+    <property name="diaSemana" type="string">
+      <column length="10" name="dia_semana" not-null="true"/>
+    </property>
+    <set fetch="select" inverse="false" lazy="true" name="membrosParticipantes" table="participa_ministerio">
+      <key>
+        <column length="45" name="ministerio" not-null="true"/>
+      </key>
+      <many-to-many entity-name="Objetos.Membro">
+        <column name="id_membro" not-null="true"/>
+      </many-to-many>
+    </set>
+  </class>
+</hibernate-mapping>

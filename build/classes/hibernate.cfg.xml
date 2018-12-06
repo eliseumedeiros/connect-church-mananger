@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/Connect_church?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">12345678</property>
+    <property name="hibernate.current_session_context_class">thread</property>
+    <mapping resource="Objetos/Mensagem.hbm.xml"/>
+    <mapping resource="Objetos/Visitante.hbm.xml"/>
+    <mapping resource="Objetos/Disciplina.hbm.xml"/>
+    <mapping resource="Objetos/Ministerio.hbm.xml"/>
+    <mapping resource="Objetos/Evento.hbm.xml"/>
+    <mapping resource="Objetos/Grupo.hbm.xml"/>
+    <mapping resource="Objetos/Ministracao.hbm.xml"/>
+    <mapping resource="Objetos/Pessoa.hbm.xml"/>
+    <mapping resource="Objetos/Assiduidade.hbm.xml"/>
+    <mapping resource="Objetos/Turma.hbm.xml"/>
+    <mapping resource="Objetos/Matricula.hbm.xml"/>
+    <mapping resource="Objetos/Membro.hbm.xml"/>
+    <mapping resource="Objetos/Seminario.hbm.xml"/>
+    <mapping resource="Objetos/Noticia.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>

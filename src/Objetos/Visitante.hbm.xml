@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03/06/2016 10:35:39 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Objetos.Visitante" table="visitante" catalog="connect_church" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="foreign">
+                <param name="property">pessoa</param>
+            </generator>
+        </id>
+        <one-to-one name="pessoa" class="Objetos.Pessoa" constrained="true"></one-to-one>
+        <property name="igrejaOrig" type="string">
+            <column name="igreja_orig" length="45" />
+        </property>
+        <set name="eventos" table="visita_evento" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="id_visitante" not-null="true" />
+            </key>
+            <many-to-many entity-name="Objetos.Evento">
+                <column name="tema_evt" length="45" not-null="true" />
+                <column name="dia_hora_evt" length="19" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

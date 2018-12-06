@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03/06/2016 10:35:39 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Objetos.Turma" table="turma" catalog="connect_church" optimistic-lock="version">
+        <composite-id name="id" class="Objetos.TurmaId">
+            <key-property name="codigo" type="string">
+                <column name="cod_disc" length="10" />
+            </key-property>
+            <key-property name="dataInicio" type="date">
+                <column name="data_inicio" length="10" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="disciplina" class="Objetos.Disciplina" update="false" insert="false" fetch="select">
+            <column name="cod_disc" length="10" not-null="true" />
+        </many-to-one>
+        <many-to-one name="membro" class="Objetos.Membro" fetch="select">
+            <column name="id_prof" not-null="true" />
+        </many-to-one>
+        <property name="dataFim" type="date">
+            <column name="data_fim" length="10" not-null="true" />
+        </property>
+        <set name="matriculas" table="matricula" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="cod_disc" length="10" not-null="true" />
+                <column name="data_inicio" length="10" not-null="true" />
+            </key>
+            <one-to-many class="Objetos.Matricula" />
+        </set>
+    </class>
+</hibernate-mapping>

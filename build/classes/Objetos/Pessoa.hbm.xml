@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03/06/2016 10:35:39 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Objetos.Pessoa" table="pessoa" catalog="connect_church" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="nome" type="string">
+            <column name="nome" length="45" not-null="true" />
+        </property>
+        <property name="sobrenome" type="string">
+            <column name="sobrenome" length="45" not-null="true" />
+        </property>
+        <property name="telefone" type="string">
+            <column name="telefone" length="12" />
+        </property>
+        <property name="endRua" type="string">
+            <column name="end_rua" length="45" />
+        </property>
+        <property name="endNumero" type="java.lang.Integer">
+            <column name="end_numero" />
+        </property>
+        <property name="endComp" type="string">
+            <column name="end_comp" length="45" />
+        </property>
+        <property name="endBairro" type="string">
+            <column name="end_bairro" length="45" />
+        </property>
+        <property name="endCidade" type="string">
+            <column name="end_cidade" length="45" />
+        </property>
+        <property name="endEstado" type="string">
+            <column name="end_estado" length="2" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="45" />
+        </property>
+        <property name="estadoCivil" type="java.lang.Character">
+            <column name="estado_civil" length="1" />
+        </property>
+        <one-to-one name="membro" class="Objetos.Membro"></one-to-one>
+        <set name="ministracaos" table="ministracao" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_minist" not-null="true" />
+            </key>
+            <one-to-many class="Objetos.Ministracao" />
+        </set>
+        <one-to-one name="visitante" class="Objetos.Visitante"></one-to-one>
+    </class>
+</hibernate-mapping>

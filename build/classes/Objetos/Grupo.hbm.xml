@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03/06/2016 10:35:39 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="connect_church" name="Objetos.Grupo" optimistic-lock="version" table="grupo">
+    <composite-id class="Objetos.GrupoId" name="id">
+      <key-property name="idLider" type="int">
+        <column name="id_lider"/>
+      </key-property>
+      <key-property name="hora" type="time">
+        <column length="8" name="hora"/>
+      </key-property>
+      <key-property name="diaSemana" type="string">
+        <column length="10" name="dia_semana"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="Objetos.Membro" fetch="select" insert="false" name="lider" update="false">
+      <column name="id_lider" not-null="true"/>
+    </many-to-one>
+    <property name="tipoGrupo" type="string">
+      <column length="45" name="tipo_grupo"/>
+    </property>
+    <property name="endRua" type="string">
+      <column length="45" name="end_rua" not-null="true"/>
+    </property>
+    <property name="endNumero" type="int">
+      <column name="end_numero" not-null="true"/>
+    </property>
+    <property name="endCompl" type="string">
+      <column length="45" name="end_compl"/>
+    </property>
+    <property name="endBairro" type="string">
+      <column length="45" name="end_bairro" not-null="true"/>
+    </property>
+    <property name="endCidade" type="string">
+      <column length="45" name="end_cidade" not-null="true"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="membros" table="membro">
+      <key>
+        <column name="id_lider"/>
+        <column length="8" name="hora_grupo"/>
+        <column length="10" name="dia_sem_grupo"/>
+      </key>
+      <one-to-many class="Objetos.Membro"/>
+    </set>
+  </class>
+</hibernate-mapping>
